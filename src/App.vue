@@ -75,7 +75,7 @@ export default {
     var cognitoIdentity = new AWS.CognitoIdentity();
     AWS.config.credentials.get(function(err) {
       if (!err) {
-        console.log('retrieved identity: ' + AWS.config.credentials.identityId);
+        //console.log('retrieved identity: ' + AWS.config.credentials.identityId);
         const params = {
           IdentityId: AWS.config.credentials.identityId
         };
@@ -95,7 +95,7 @@ export default {
     mqttClient.on('message', this.messageHandler);
 
     EventBus.$on('selected', index => {
-      console.log(index);
+      //console.log(index);
       this.content = []
       if (index >= 0) {
         this.content = this.data[index]
@@ -104,20 +104,20 @@ export default {
   },
   methods: {
     connectHandler: function() {
-      console.log('connect')
+      //console.log('connect')
       this.status = 'connected'
       mqttClient.subscribe(this.mainTopic)
     },
     reconnectHandler: function() {
       this.status = 'connection'
-      console.log('reconnect')
+      //console.log('reconnect')
     },
     disconnectHandler: function() {
-      console.log('disconnected')
+      //console.log('disconnected')
       this.status = 'disconnected'
     },
     errorHandler: function() {
-      console.log('error')
+      //console.log('error')
       this.status = 'error'
     },
     messageHandler: function(topic, payload) {
