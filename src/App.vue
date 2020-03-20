@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader title="Welcome to Cloud-IoT dashboard" v-bind:status="status"/>
+    <AppHeader title="Welcome to IoT-dashboard" v-bind:status="status"/>
     <div class="wrapper d-flex">
       <div class="sideMenu">
         <div class="sidebar">
