@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
+                git 'https://github.com/amar-ox/iot-dashboard.git/'
                 sh 'npm install' 
             }
         }
