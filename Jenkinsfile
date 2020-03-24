@@ -11,6 +11,11 @@ pipeline {
         stage('Test') { 
             steps {
                 sh 'docker run --rm iot-dashboard-test'
+            }
+        }
+        
+        stage('Clean') {
+            steps {
                 sh 'docker rmi iot-dashboard-test' 
             }
         }
@@ -18,7 +23,7 @@ pipeline {
         stage('Deploy') { 
             steps {
                 sh 'docker build -t iot-dashboard --no-cache .'
-                sh 'docker run -it -p 9090:8080 --rm --name=iot-dashboard iot-dashboard'
+                sh 'docker run -p 9090:8080 -d --rm --name=iot-dashboard iot-dashboard'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh 'docker stop iot-dashboard'
                 sh 'docker rmi iot-dashboard' 
