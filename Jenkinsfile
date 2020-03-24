@@ -1,27 +1,26 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:13.10.1-alpine3.11' 
-            args '-p 9090:9090' 
-        }
-    }
     stages {
         stage('Build') { 
             steps {
                 git 'https://github.com/amar-ox/iot-dashboard.git/'
-                sh 'npm install' 
+                sh 'docker build -t iot-dashboard-test -f Dockerfile.test --no-cache .'
             }
         }
         
         stage('Test') { 
             steps {
-                sh 'npm run test:unit' 
+                sh 'docker run --rm iot-dashboard-test'
+                sh 'docker rmi iot-dashboard-test' 
             }
         }
         
         stage('Deploy') { 
             steps {
-                sh 'npm run serve' 
+                sh 'docker build -t iot-dashboard --no-cache .'
+                sh 'docker run -it -p 9090:8080 --rm --name=iot-dashboard iot-dashboard'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh 'docker stop iot-dashboard'
+                sh 'docker rmi iot-dashboard' 
             }
         }
     }
