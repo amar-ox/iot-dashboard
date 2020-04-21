@@ -10,7 +10,7 @@
         <i class="material-icons icon">memory</i>
         <span id="name" class="text">{{ device.name }}</span>  
         <p id="label">{{ device.label }}</p>
-        <span v-for="dlabel in device.data_labels" v-bind:key="dlabel"
+        <span v-for="dlabel in device.resultColumns" v-bind:key="dlabel"
           class="badge badge-pill badge-info"
         >{{ dlabel }}</span>
       </a>

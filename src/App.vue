@@ -127,12 +127,12 @@ export default {
         let i = this.deviceNames.indexOf(d.device.name)
         if (i != -1) {
           //console.log('device exists')
-          this.data[i].push(d.data)
+          this.data[i].push(d.resultValues)
         } else {
           //console.log('new device')
           this.deviceNames.push(d.device.name)
           this.devices.push(d.device)
-          this.data.push([d.data])
+          this.data.push([d.resultValues])
         }
       }
     },
